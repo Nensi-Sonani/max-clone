@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { funFetchData } from '../redux/productreducer/Action'
 import { Accordion, Spinner } from 'react-bootstrap';
-import '../style/product.css'
+import '../Style/product.css'
 import { useEffect, useState } from 'react';
 import MultiRangeSlider, { ChangeResult } from "multi-range-slider-react";
 
