@@ -1,15 +1,9 @@
-<<<<<<< HEAD
-// import logo from './logo.svg';
-import './App.css';
-import Home from './pages/Home';
-import 'bootstrap/dist/css/bootstrap.min.css'
 
-function App() {
-  return (
-    <>
-    <Home/>
-    </>
-=======
+
+import logo from './logo.svg';
+import Allroute from './router/Allroute'
+import Nav from './components/Nav'
+
 import './App.css';
 import Product from './pages/Product';
 import Cart from './pages/Cart';
@@ -19,11 +13,11 @@ import { ProductDetail } from './pages/ProductDetail';
 
 function App() {
   return (
-    <div className='fluid mx-auto'>
-   
-    
+    <div className="App">
+      <Nav/>
+     <Allroute/>
     </div>
->>>>>>> main
+
   );
 }
 
