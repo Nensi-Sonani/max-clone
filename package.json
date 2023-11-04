@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
    "@react-icons/all-files": "^4.1.0",
+   
     "@chakra-ui/react": "^2.8.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
