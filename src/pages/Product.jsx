@@ -39,7 +39,7 @@ const Product = () => {
             max={2000}
             maxValue={1500}
             minValue={400}
-            onInput={(e: ChangeResultt) => {
+            onInput={(e: ChangeResult) => {
               setMinValue(e.minValue);
               setMaxValue(e.maxValue);
             }}

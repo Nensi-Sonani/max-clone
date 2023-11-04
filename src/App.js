@@ -1,7 +1,9 @@
 
+
 import logo from './logo.svg';
 import Allroute from './router/Allroute'
 import Nav from './components/Nav'
+
 import './App.css';
 import Product from './pages/Product';
 import Cart from './pages/Cart';
@@ -15,6 +17,7 @@ function App() {
       <Nav/>
      <Allroute/>
     </div>
+
   );
 }
 
