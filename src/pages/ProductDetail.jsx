@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom'
-import ZoomSlider from '../components/ZoomSlider';
+
 import { funAddCart } from '../redux/Action';
 
 export const ProductDetail = () => {
@@ -39,7 +39,7 @@ export const ProductDetail = () => {
                 <div className='flex_box '>
                     <div className='col-md-7 mx auto' >
                         <div className='detail_image'>
-                            <ZoomSlider />
+                            
                         </div>
                     </div>
                     <div className='col-md-5 mx auto detail_block'>
