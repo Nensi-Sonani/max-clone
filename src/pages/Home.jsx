@@ -1,6 +1,6 @@
 // import React, { useState } from 'react'
 import {Carousel} from 'react-bootstrap';
-import '../style/Home.css'
+import '../Style/Home.css'
 
 const Home = () => {
 
