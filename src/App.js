@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+// import logo from './logo.svg';
+import './App.css';
+import Home from './pages/Home';
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+function App() {
+  return (
+    <>
+    <Home/>
+    </>
+=======
 import './App.css';
 import Product from './pages/Product';
 import Cart from './pages/Cart';
@@ -11,6 +23,7 @@ function App() {
    
     
     </div>
+>>>>>>> main
   );
 }
 
