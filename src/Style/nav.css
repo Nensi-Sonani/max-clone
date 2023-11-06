@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.Nav{
+ display: flex;
+ position: fixed;
+ position: relative;
+ width: 100%;
+ justify-content: space-around;
+ height: 60px;
+ vertical-align: middle;
+ background-color: rgb(247, 248, 247);
+}
+
+.link img{
+    width: 50%;
+    /* height: 60%; */
+    padding-left: 100px;
+    
+}
+
+.link{
+    color: black;
+    text-decoration: none;
+    padding-top: 15px;   
+    font-size: 14px
+  
+}
+.link:hover{
+    color: blue;
+}
+.navform{
+    padding-top: 15px;
+}
