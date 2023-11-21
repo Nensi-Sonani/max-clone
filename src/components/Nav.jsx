@@ -8,14 +8,14 @@ import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import '../Style/nav.css'
+import '../style/nav.css'
 const Nav = () => {
   return (
     <div className="Nav">
       <Link to="/" className="link">
          <img src="https://i1.lmsin.net/website_images/in/logos/logo-max.svg"/>
        </Link>
-       <Link to="/Women" className="link">
+       <Link to="/Product" className="link">
         <span>Women</span>
        </Link>
        <Link to="/Men" className="link">
