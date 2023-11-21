@@ -15,7 +15,7 @@ const Nav = () => {
       <Link to="/" className="link">
          <img src="https://i1.lmsin.net/website_images/in/logos/logo-max.svg"/>
        </Link>
-       <Link to="/Women" className="link">
+       <Link to="/Product" className="link">
         <span>Women</span>
        </Link>
        <Link to="/Men" className="link">
