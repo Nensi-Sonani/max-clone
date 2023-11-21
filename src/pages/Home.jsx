@@ -1,5 +1,8 @@
 // import React, { useState } from 'react'
 import {Carousel} from 'react-bootstrap';
+
+import Footer from '../components/Footer';
+
 import '../style/Home.css'
 
 const Home = () => {
@@ -227,9 +230,9 @@ const Home = () => {
     {/* subscribe section  */}
     <section className='subscribe'>
     <div className="container">
-      
     </div>
     </section>
+    <Footer/>
     </>
   )
 }
