@@ -1,5 +1,5 @@
 const express = require('express');
-//const multer = require('multer');
+
 const cors = require('cors');
 const connect = require('./config/db');
 const router = require('./routes/routes');

@@ -1,5 +1,3 @@
-
-
 import Allroute from './router/Allroute'
 import Nav from './components/Nav'
 
