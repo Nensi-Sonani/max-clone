@@ -27,29 +27,29 @@ const loginpost =async(req,res)=>{
 }
 
 
-const store = multer.diskStorage({
-  destination: "uploads",
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
+// const store = multer.diskStorage({
+//   destination: "uploads",
+//   filename: (req, file, cb) => {
+//     cb(null, file.originalname);
+//   },
+// });
 
-const multimulter =(req, res) => {
-  upload(req, res, (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      const img = new images({
-        image: {
-          data: req.file.filename,
-          contentType: "image/png",
-        },
-      });
+// const multimulter =(req, res) => {
+//   upload(req, res, (err) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       const img = new images({
+//         image: {
+//           data: req.file.filename,
+//           contentType: "image/png",
+//         },
+//       });
 
-      images.create(img);
-      res.send("uploaded");
-    }
-  });
-}
+//       images.create(img);
+//       res.send("uploaded");
+//     }
+//   });
+// }
 
-module.exports ={loginpost,signuppost,multimulter};
+module.exports ={loginpost,signuppost};

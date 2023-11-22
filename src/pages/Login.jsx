@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../index.css"
+import { funSignIn } from '../redux/Action';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
+  let [email, setEmail] = useState("")
+  let [password, setPassword] = useState("")
+  let dispatch = useDispatch();
+  let navi=useNavigate();
+  const handleSignin = (e) => {
+    e.preventDefault();
+    dispatch(funSignIn())
+    navi("/")
+
+  }
+
   return (
     <div>
       <section className="vh-100">
@@ -15,45 +29,31 @@ const Login = () => {
               />
             </div>
             <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-              <form>
+              <form onSubmit={handleSignin}>
                 {/* Email input */}
                 <div className="form-outline mb-4">
                   <input
                     type="email"
-                    id="form1Example13"
+                    onChange={(e) => setEmail(e.target.value)}
                     className="form-control form-control-lg"
+                    placeholder='Email address'
                   />
-                  <label className="form-label" htmlFor="form1Example13">
-                    Email address
-                  </label>
                 </div>
 
                 {/* Password input */}
                 <div className="form-outline mb-4">
                   <input
                     type="password"
-                    id="form1Example23"
+                    onChange={(e) => setPassword(e.target.value)}
                     className="form-control form-control-lg"
+                    placeholder='Password'
                   />
-                  <label className="form-label" htmlFor="form1Example23">
-                    Password
-                  </label>
                 </div>
 
                 <div className="d-flex justify-content-around align-items-center mb-4">
                   {/* Checkbox */}
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="form1Example3"
-                      defaultChecked
-                    />
-                    <label className="form-check-label" htmlFor="form1Example3">
-                      Remember me
-                    </label>
-                  </div>
+                  
+                  
                   <a href="#!">Forgot password?</a>
                 </div>
 

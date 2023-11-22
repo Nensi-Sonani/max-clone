@@ -5,13 +5,16 @@ import { Accordion, Spinner } from 'react-bootstrap';
 import '../style/product.css'
 import { useEffect, useState } from 'react';
 import MultiRangeSlider, { ChangeResult } from "multi-range-slider-react";
+import { Link } from 'react-router-dom';
 
 
 const Product = () => {
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(0);
-  //const [minValue2, setMinValue2] = useState(0);
-  // const [maxValue2, setMaxValue2] = useState(0);
+  const arrayColor = [
+    "Blue", "Green", "Pink", "Black", "Purple", "Beige", "Grey",
+    "White", "Brown", "Yellow", "Orange", "Red", "Maroon", "Multicolour",  "Teal"
+  ]
   let { data, isLoading, isError } = useSelector((store) => store.ProductReducer)
 
   let dispatch = useDispatch();
@@ -30,8 +33,8 @@ const Product = () => {
     //console.log(data)
   }, [])
   return (
-    <div className='col-md-12 col-lg-12 col-sm-12 col-xs-12 mx-auto d-flex'>
-      <div className='col-md-2 col-lg-2 col-sm-2 col-xs-2 sidebar'>
+    <div className='col-md-10 col-lg-10 col-sm-10 col-xs-10 mx-auto d-flex'>
+      <div className='col-md-3 col-lg-3 col-sm-3 col-xs-3 sidebar'>
         <h4 className='fileter_header'>FILTERS</h4>
         <div>
           <MultiRangeSlider
@@ -86,11 +89,27 @@ const Product = () => {
           <Accordion.Item eventKey="1">
             <Accordion.Header> Size</Accordion.Header>
             <Accordion.Body>
-            <div className="form-check">
-            <input type="checkbox" className='form-check-input' value='mens'
-              name="catagory" />
-            <label className='form-check-label'>Men</label>
-          </div>
+              <div className="form-check">
+                <input type="checkbox" className='form-check-input' value='S'
+                  name="size" />
+                <label className='form-check-label'>S</label>
+              </div>
+              <div className="form-check">
+                <input type="checkbox" className='form-check-input' value='M'
+                  name="size" />
+                <label className='form-check-label'>M</label>
+              </div>
+              <div className="form-check">
+                <input type="checkbox" className='form-check-input' value='L'
+                  name="size" />
+                <label className='form-check-label'>L</label>
+              </div>
+              <div className="form-check">
+                <input type="checkbox" className='form-check-input' value='XL'
+                  name="size" />
+                <label className='form-check-label'>XL</label>
+              </div>
+
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="2" >
@@ -101,15 +120,25 @@ const Product = () => {
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="3">
-            <Accordion.Header>Type</Accordion.Header>
+            <Accordion.Header>Color</Accordion.Header>
             <Accordion.Body>
-
+              {
+                arrayColor.map((item) => {
+                 return( <div className="form-check" >
+                 <div>
+                    <input type="checkbox" style={{ border:`3px solid ${item}`}} className='form-check-input' value={item}
+                      name="color" />
+                      </div>
+                    <label className='form-check-label'>{item}</label>
+                  </div>)
+                })
+              }
 
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
       </div>
-      <div className='col-md-10 col-lg-12 col-sm-10 col-xs-10  mx-auto'>
+      <div className='col-md-10 col-lg-10 col-sm-10 col-xs-10  mx-auto'>
         {
           isError ? (<div className="alert alert-danger" role="alert">T
             Some thing went wrong !
@@ -131,10 +160,11 @@ const Product = () => {
                 return (
                   <div className='product__single' key={item.id}>
 
-
-                    <div className='image'>  <img src={item.image} alt={item.title}></img></div>
-                    <div className='price'> &#8377; {item.price}</div>
-                    <div className='title'>{item.title}</div>
+                    <Link className='plink' to={`/productdetail/${item.id}`} >
+                      <div className='image'>  <img src={item.image[0]} alt={item.title}></img></div>
+                      <div className='price'> &#8377; {item.price}</div>
+                      <div className='title'>{item.title}</div>
+                    </Link>
                     <div className='d-flex wrap justify-content-around'>
                       <div className='wrap-img'>
                         <img src={item.image} alt="p" ></img>

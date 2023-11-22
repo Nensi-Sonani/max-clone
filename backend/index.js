@@ -1,5 +1,5 @@
 const express = require('express');
-const multer = require('multer');
+//const multer = require('multer');
 const cors = require('cors');
 const connect = require('./config/db');
 const router = require('./routes/routes');
@@ -13,9 +13,9 @@ app.use(router)
 
 
 
-let upload = multer({
-    dest:"img/"
-})
+// let upload = multer({
+//     dest:"img/"
+// })
 
 app.listen(8080,()=>{
     console.log('listening on port 8080')
