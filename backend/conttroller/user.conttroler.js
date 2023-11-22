@@ -27,6 +27,10 @@ const loginpost =async(req,res)=>{
    }
 }
 
+const getproducts =async (req, res) =>{
+  let data = await productmodel.find()
+  res.send({data:data})
+}
 
 
 
@@ -35,5 +39,5 @@ const products =async(req,res) => {
     res.send({msg:"product added successfully"});
 }
 
-module.exports ={loginpost,signuppost,products};
+module.exports ={loginpost,signuppost,products,getproducts};
 
