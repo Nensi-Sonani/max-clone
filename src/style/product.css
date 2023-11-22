@@ -91,7 +91,10 @@
     font-size: 18px;
 
 }
-
+.plink{
+    color:rgb(51, 50, 50);
+    text-decoration: none;
+}
 .price:hover {
 
     font-weight: bold;

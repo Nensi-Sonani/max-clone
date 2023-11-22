@@ -2,6 +2,7 @@
 //import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
 //import { Link, useNavigate } from 'react-router-dom';
 
 const Cart = () => {
@@ -46,7 +47,7 @@ const Cart = () => {
                     }
                     <div className='col-md-5 col-lg-5 col-sm-5 col-xl-5'>
                         <br></br>
-                        <a path="/product" className='linkp' >  <button className='btn_cart btn btn-primary' >CONTINUE SHOPPING</button></a>
+                        <Link to="/product" className='linkp' >  <button className='btn_cart btn btn-primary' >CONTINUE SHOPPING</button></Link>
                     </div>
                 </div>
                 {user.userid != null ? "" : (

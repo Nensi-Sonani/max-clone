@@ -4,9 +4,11 @@ import {Carousel} from 'react-bootstrap';
 import Footer from '../components/Footer';
 
 import '../style/Home.css'
+import { useSelector } from 'react-redux';
 
 const Home = () => {
-
+  let user = useSelector((stor) => stor.Reducer)
+  console.log(user)
   // const [index, setIndex] = useState(0);
 
   // const handleSelect = (selectedIndex) => {

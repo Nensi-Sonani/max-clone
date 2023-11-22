@@ -1,6 +1,22 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { funSignUp } from '../redux/Action';
 
 const Signup = () => {
+  let [name,setName]=useState("")
+  let [email,setEmail]=useState("")
+  let [password,setPasword]=useState("")
+  let [msg,setMsg]=useState("")
+  let dispatch=useDispatch();
+  const handleSignup=(e)=>{
+    e.preventDefault();
+    let obj={username:name,email:email,password:password}
+   // dispatch(funSignUp());
+  
+   axios.post("http://localhost:8080/signup",obj)
+   .then((res)=>setMsg(res.data))
+  }
   return (
     <div>
       <section className="vh-100">
@@ -14,45 +30,39 @@ const Signup = () => {
               />
             </div>
             <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-              <form>
+            {msg}
+              <form onSubmit={handleSignup}>
                 {/* Email input */}
                 <div className="form-outline mb-4">
                   <input
-                    type="email"
-                    id="form1Example13"
+                    type="text"
+                  onChange={(e)=>setName(e.target.value)}
+                  placeholder='User Name'
                     className="form-control form-control-lg"
                   />
-                  <label className="form-label" htmlFor="form1Example13">
-                    Email address
-                  </label>
+                </div>
+                <div className="form-outline mb-4">
+                  <input
+                    type="email"
+                    onChange={(e)=>setEmail(e.target.value)}
+                    className="form-control form-control-lg"
+                    placeholder='Email Address'
+                  />
                 </div>
 
                 {/* Password input */}
                 <div className="form-outline mb-4">
                   <input
                     type="password"
-                    id="form1Example23"
+                    onChange={(e)=>setPasword(e.target.value)}
                     className="form-control form-control-lg"
+                    placeholder='Password'
                   />
-                  <label className="form-label" htmlFor="form1Example23">
-                    Password
-                  </label>
                 </div>
 
                 <div className="d-flex justify-content-around align-items-center mb-4">
                   {/* Checkbox */}
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="form1Example3"
-                      defaultChecked
-                    />
-                    <label className="form-check-label" htmlFor="form1Example3">
-                      Remember me
-                    </label>
-                  </div>
+                 
                   <a href="#!">Forgot password?</a>
                 </div>
 
@@ -68,22 +78,7 @@ const Signup = () => {
                   <p className="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
                 </div>
 
-                <a
-                  className="btn btn-primary btn-lg btn-block"
-                  style={{ backgroundColor: '#3b5998' }}
-                  href="#!"
-                  role="button"
-                >
-                  <i className="fab fa-facebook-f me-2"></i>Continue with Facebook
-                </a>
-                <a
-                  className="btn btn-primary btn-lg btn-block"
-                  style={{ backgroundColor: '#55acee' }}
-                  href="#!"
-                  role="button"
-                >
-                  <i className="fab fa-twitter me-2"></i>Continue with Twitter
-                </a>
+               
               </form>
             </div>
           </div>

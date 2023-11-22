@@ -27,9 +27,13 @@ const loginpost =async(req,res)=>{
    }
 }
 
+
+
+
 const products =async(req,res) => {
     let data = await productmodel.create(req.body);
     res.send({msg:"product added successfully"});
 }
 
 module.exports ={loginpost,signuppost,products};
+
