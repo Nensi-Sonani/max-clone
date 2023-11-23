@@ -5,8 +5,9 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { funAddCart } from '../redux/Action';
 
 export const ProductDetail = () => {
-    //let { id } = useParams();
-    let id = 1;
+    const { id } = useParams();
+   // alert(id)
+    //let id = 1;
     let [data, setData] = useState("")
     let userId = useSelector((stor) => stor.Reducer.user.id)
     let dispatch = useDispatch();
@@ -16,6 +17,7 @@ export const ProductDetail = () => {
     const fetchProductDetail = () => {
         axios.get(`${livejsonServer}/products/${id}`)
             .then((res) => {
+                console.log(res.data)
                 setData(res.data)
             })
             .catch((error) => console.log(error))
@@ -50,10 +52,10 @@ export const ProductDetail = () => {
                             <p>{data.description} </p></div>
 
                         <div className='divfeature text-left custome-radio mb-3'><div className='tag' >Select Size:</div>
-                            <input className='form-check-input ' name="flexRadioDefault" type="radio"></input><label>S</label>
-                            <input className='form-check-input ' name="flexRadioDefault" type="radio"></input><label>m</label>
-                            <input className='form-check-input ' name="flexRadioDefault" type="radio"></input><label>l</label>
-                            <input className='form-check-input ' name="flexRadioDefault" type="radio"></input><label>xl   </label>
+                            <input className='form-check-input ' value="s" name="flexRadioDefault" type="radio"></input><label>S</label>
+                            <input className='form-check-input ' value="m" name="flexRadioDefault" type="radio"></input><label>m</label>
+                            <input className='form-check-input ' value="l" name="flexRadioDefault" type="radio"></input><label>l</label>
+                            <input className='form-check-input '  value="xl" name="flexRadioDefault" type="radio"></input><label>xl   </label>
                         </div>
                         <div className='mx-2  mb-4 '>
                             <button onClick={handleCart} className='btn_cart p-3 btn btn-primary' >ADD TO BASKET</button>

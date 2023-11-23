@@ -15,10 +15,10 @@ const Product = () => {
     param: []
   });
   const arrayColor = [
-    "Blue", "Pink", "Green", "Yellow", "Grey", "Purple", "Brown", "Orange", "Beige", "Red", "White", "Maroon", "Coral"
+    "blue", "pink", "green", "yellow", "grey", "purple", "brown", "orange", "beige", "red", "white", "maroon", "coral"
   ]
-  const arrayCategory = ["Men", "Women", "Girls", "Boys"]
-  const arraySize = ["S", "M", "L", "XL"]
+  const arrayCategory = ["men", "women", "girl", "boy"]
+  const arraySize = ["s", "m", "l", "xl"]
   //const [minValue2, setMinValue2] = useState(0);
   // const [maxValue2, setMaxValue2] = useState(0);
   let { data, isLoading, isError } = useSelector((store) => store.ProductReducer)
@@ -27,7 +27,8 @@ const Product = () => {
   let category = "";
   let dispatch = useDispatch();
   //product by category
-  const catParam = useParams();
+  let catParam = useParams();
+
   let catagory = "";
   if (Object.keys(catParam).length > 0)
     category = catParam.category;
@@ -48,7 +49,7 @@ const Product = () => {
   }
 
   const loadProduct = () => {
-    console.log(filterQuery)
+    //console.log(filterQuery)
     dispatch(funFetchData(filterQuery))
 
   }
@@ -120,7 +121,7 @@ const Product = () => {
                     <div className="form-check">
                       <input type="checkbox" className='form-check-input' value={item}
                         name="category" onChange={handleChange} />
-                      <label className='form-check-label'>{item}</label>
+                      <label className='form-check-label capit' >{item}</label>
                     </div>
                   )
                 })
@@ -140,7 +141,7 @@ const Product = () => {
                         name="size"
                         onChange={handleChange}
                       />
-                      <label className='form-check-label'>{item}</label>
+                      <label className='form-check-label capit'>{item}</label>
                     </div>
                   )
                 })
@@ -159,7 +160,7 @@ const Product = () => {
                       <input style={{ border: `3px solid ${item}` }} type="checkbox" className='form-check-input' value={item}
                         name="color"
                         onChange={handleChange} />
-                      <label className='form-check-label'>{item}</label>
+                      <label className='form-check-label capit'>{item}</label>
                     </div>
                   )
                 })

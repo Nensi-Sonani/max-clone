@@ -2,10 +2,11 @@ import axios from 'axios'
 import { ERROR, SUCCESS, LOADING } from './ActionType'
 export const funFetchData = (filterQuery) => (_dispatch) => {
     let filter = filterQuery.replaceAll(",", "")
+    console.log(filter)
     _dispatch({ type: LOADING })
     axios.get(`http://localhost:8080/products${filter}`)
         .then((res) => {
-            console.log(res.data.data)
+           // console.log(res.data.data)
             _dispatch({ type: SUCCESS, payload: res.data.data })
         })
         .catch((error) => {

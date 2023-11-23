@@ -83,7 +83,9 @@
     padding: 0.5rem;
     border-bottom: 1px dotted gray;
 }
-
+.capit{
+    text-transform: capitalize;
+}
 .price {
 
     font-weight: bold;

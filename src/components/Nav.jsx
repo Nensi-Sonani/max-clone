@@ -15,16 +15,16 @@ const Nav = () => {
       <Link to="/" className="link">
         <img src="https://i1.lmsin.net/website_images/in/logos/logo-max.svg" />
       </Link>
-      <Link to="/Product/Women" className="link">
+      <Link to="/Product/women" className="link">
         <span>Women</span>
       </Link>
-      <Link to="/Product/Men" className="link">
+      <Link to="/Product/men" className="link">
         <span>Men</span>
       </Link>
-      <Link to="/Product/Girl" className="link">
+      <Link to="/Product/girl" className="link">
         <span>Girl</span>
       </Link>
-      <Link to="/Product/Boy" className="link">
+      <Link to="/Product/boy" className="link">
         <span>Boy</span>
       </Link>
       <Form inline className='navform'>
