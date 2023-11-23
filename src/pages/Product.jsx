@@ -5,33 +5,81 @@ import { Accordion, Spinner } from 'react-bootstrap';
 import '../style/product.css'
 import { useEffect, useState } from 'react';
 import MultiRangeSlider, { ChangeResult } from "multi-range-slider-react";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 
 const Product = () => {
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(0);
+  let [filter, setFilter] = useState({
+    param: []
+  });
   const arrayColor = [
-    "Blue", "Green", "Pink", "Black", "Purple", "Beige", "Grey",
-    "White", "Brown", "Yellow", "Orange", "Red", "Maroon", "Multicolour",  "Teal"
+    "Blue", "Pink", "Green", "Yellow", "Grey", "Purple", "Brown", "Orange", "Beige", "Red", "White", "Maroon", "Coral"
   ]
+  const arrayCategory = ["Men", "Women", "Girls", "Boys"]
+  const arraySize = ["S", "M", "L", "XL"]
+  //const [minValue2, setMinValue2] = useState(0);
+  // const [maxValue2, setMaxValue2] = useState(0);
   let { data, isLoading, isError } = useSelector((store) => store.ProductReducer)
-
+  
+  
+  let category = "";
   let dispatch = useDispatch();
+  //product by category
+  const catParam = useParams();
+  let catagory = "";
+  if (Object.keys(catParam).length > 0)
+    category = catParam.category;
 
+  if (catagory !== null && catagory !== "") {
+    filterQuery = `?category=${catagory}`
+  }
+  let filterQuery = "";
+  let tmpFilter="";
+  
+  if (filter.param.length > 0) {
+
+    tmpFilter = filter.param;
+    if (filterQuery == "")
+      filterQuery = "?" + tmpFilter
+    else
+      filterQuery = filterQuery + tmpFilter
+  }
 
   const loadProduct = () => {
-    dispatch(funFetchData)
+    console.log(filterQuery)
+    dispatch(funFetchData(filterQuery))
 
   }
-  const handleChange = () => {
+
+  const handleChange = (e) => {
+    const { value, checked, name } = e.target;
+    const { param } = filter;
+    let query = "";
+    if (name == "color")
+      query = "&color=";
+    else if (name == "size")
+      query = "&size="
+    else if (name == "category")
+      query = "&category="
+
+    if (checked) {
+      setFilter({
+        param: [...param, query + value],
+      });
+    }
+    else {
+      setFilter({
+        param: param.filter((e) => e !== query + value),
+      });
+    }
 
   }
 
   useEffect(() => {
     loadProduct();
-    //console.log(data)
-  }, [])
+  }, [filter,category])
   return (
     <div className='col-md-10 col-lg-10 col-sm-10 col-xs-10 mx-auto d-flex'>
       <div className='col-md-3 col-lg-3 col-sm-3 col-xs-3 sidebar'>
@@ -66,73 +114,63 @@ const Product = () => {
           <Accordion.Item eventKey="0">
             <Accordion.Header> Catagory</Accordion.Header>
             <Accordion.Body>
-              <div className="form-check">
-                <input type="checkbox" className='form-check-input' value='mens'
-                  name="catagory" />
-                <label className='form-check-label'>Men</label>
-              </div>
-              <div className="form-check">
-                <input type="checkbox" className='form-check-input' value='womens'
-                  name="catagory"
-                />
-                <label className='form-check-label'>Women</label>
-              </div>
-              <div className="form-check">
-                <input type="checkbox" className='form-check-input' value='kids'
-                  name="catagory"
-                />
-                <label className='form-check-label'>Kids</label>
-              </div>
+              {
+                arrayCategory.map((item) => {
+                  return (
+                    <div className="form-check">
+                      <input type="checkbox" className='form-check-input' value={item}
+                        name="category" onChange={handleChange} />
+                      <label className='form-check-label'>{item}</label>
+                    </div>
+                  )
+                })
+
+              }
 
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="1">
             <Accordion.Header> Size</Accordion.Header>
             <Accordion.Body>
-              <div className="form-check">
-                <input type="checkbox" className='form-check-input' value='S'
-                  name="size" />
-                <label className='form-check-label'>S</label>
-              </div>
-              <div className="form-check">
-                <input type="checkbox" className='form-check-input' value='M'
-                  name="size" />
-                <label className='form-check-label'>M</label>
-              </div>
-              <div className="form-check">
-                <input type="checkbox" className='form-check-input' value='L'
-                  name="size" />
-                <label className='form-check-label'>L</label>
-              </div>
-              <div className="form-check">
-                <input type="checkbox" className='form-check-input' value='XL'
-                  name="size" />
-                <label className='form-check-label'>XL</label>
-              </div>
+              {
+                arraySize.map((item) => {
+                  return (
+                    <div className="form-check">
+                      <input type="checkbox" className='form-check-input' value={item}
+                        name="size"
+                        onChange={handleChange}
+                      />
+                      <label className='form-check-label'>{item}</label>
+                    </div>
+                  )
+                })
 
+              }
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="2" >
-            <Accordion.Header> Style</Accordion.Header>
+            <Accordion.Header> Color</Accordion.Header>
             <Accordion.Body>
 
+              {
+                arrayColor.map((item) => {
+                  return (
+                    <div className="form-check">
+                      <input style={{ border: `3px solid ${item}` }} type="checkbox" className='form-check-input' value={item}
+                        name="color"
+                        onChange={handleChange} />
+                      <label className='form-check-label'>{item}</label>
+                    </div>
+                  )
+                })
 
+              }
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="3">
-            <Accordion.Header>Color</Accordion.Header>
+            <Accordion.Header>Type</Accordion.Header>
             <Accordion.Body>
-              {
-                arrayColor.map((item) => {
-                 return( <div className="form-check" >
-                 <div>
-                    <input type="checkbox" style={{ border:`3px solid ${item}`}} className='form-check-input' value={item}
-                      name="color" />
-                      </div>
-                    <label className='form-check-label'>{item}</label>
-                  </div>)
-                })
-              }
+
 
             </Accordion.Body>
           </Accordion.Item>
@@ -158,16 +196,16 @@ const Product = () => {
             {
               data.map((item) => {
                 return (
-                  <div className='product__single' key={item.id}>
+                  <div className='product__single' key={item._id}>
 
-                    <Link className='plink' to={`/productdetail/${item.id}`} >
+                    <Link className='plink' to={`/productdetail/${item._id}`} >
                       <div className='image'>  <img src={item.image[0]} alt={item.title}></img></div>
                       <div className='price'> &#8377; {item.price}</div>
                       <div className='title'>{item.title}</div>
                     </Link>
                     <div className='d-flex wrap justify-content-around'>
                       <div className='wrap-img'>
-                        <img src={item.image} alt="p" ></img>
+                        <img style={{ background: `${item.color}` }} src={item.image[0]} alt="p" ></img>
                         <span>color</span>
                       </div>
                       <div>
@@ -178,6 +216,7 @@ const Product = () => {
                           <option value="S">S</option>
                           <option value="M">M</option>
                           <option value="L">L</option>
+                          <option value="XL">XL</option>
                         </select>
                       </div>
                     </div>

@@ -9,14 +9,16 @@ function SignupSignin() {
   const val = useSelector(store => store)
   // console.log(val)
   return (
-    <div className='form'>
+    <div>
       {toggle ? <Signup /> : <Login />}
-      <div >
-        <h3 onClick={() => setToggle(!toggle)} >
+      <div className='text-center'>
+        <h5 onClick={() => setToggle(!toggle)} >
           {toggle ? <span>Already have a accont</span> : <span>Don't have Account </span>}
-        </h3>
+        </h5>
       </div>
-    </div>
+
+
+    </div >
 
   )
 }

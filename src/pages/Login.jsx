@@ -18,8 +18,8 @@ const Login = () => {
 
   return (
     <div>
-      <section className="vh-100">
-        <div className="container py-5 h-100">
+      <section className="py-5">
+        <div className="container">
           <div className="row d-flex align-items-center justify-content-center h-100">
             <div className="col-md-8 col-lg-7 col-xl-6">
               <img
@@ -36,7 +36,7 @@ const Login = () => {
                     type="email"
                     onChange={(e) => setEmail(e.target.value)}
                     className="form-control form-control-lg"
-                    placeholder='Email address'
+                    placeholder='Email Address'
                   />
                 </div>
 
@@ -69,22 +69,9 @@ const Login = () => {
                   <p className="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
                 </div>
 
-                <a
-                  className="btn btn-primary btn-lg btn-block"
-                  style={{ backgroundColor: '#3b5998' }}
-                  href="#!"
-                  role="button"
-                >
-                  <i className="fab fa-facebook-f me-2"></i>Continue with Facebook
-                </a>
-                <a
-                  className="btn btn-primary btn-lg btn-block"
-                  style={{ backgroundColor: '#55acee' }}
-                  href="#!"
-                  role="button"
-                >
-                  <i className="fab fa-twitter me-2"></i>Continue with Twitter
-                </a>
+                
+                
+                 
               </form>
             </div>
           </div>
