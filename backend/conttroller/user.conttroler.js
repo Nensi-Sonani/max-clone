@@ -30,7 +30,7 @@ const loginpost =async(req,res)=>{
 const getproducts =async (req, res) =>{
  
   if(req.query){
-    let d = await productmodel.find(data)
+    let d = await productmodel.find(req.query)
     res.send({data:d})
   }
   else{
