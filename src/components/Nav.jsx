@@ -13,23 +13,23 @@ const Nav = () => {
   return (
     <div className="Nav">
       <Link to="/" className="link">
-         <img src="https://i1.lmsin.net/website_images/in/logos/logo-max.svg"/>
-       </Link>
-       <Link to="/Product" className="link">
+        <img src="https://i1.lmsin.net/website_images/in/logos/logo-max.svg" />
+      </Link>
+      <Link to="/Product/Women" className="link">
         <span>Women</span>
-       </Link>
-       <Link to="/Men" className="link">
+      </Link>
+      <Link to="/Product/Men" className="link">
         <span>Men</span>
-       </Link>
-       <Link to="/Girl" className="link">
+      </Link>
+      <Link to="/Product/Girl" className="link">
         <span>Girl</span>
-       </Link>
-       <Link to="/Boy" className="link">
+      </Link>
+      <Link to="/Product/Boy" className="link">
         <span>Boy</span>
-       </Link>
-       <Form inline className='navform'>
+      </Link>
+      <Form inline className='navform'>
         <InputGroup>
-          <InputGroup.Text id="basic-addon1"><BiSearch/></InputGroup.Text>
+          <InputGroup.Text id="basic-addon1"><BiSearch /></InputGroup.Text>
           <Form.Control
             placeholder="What are you looking for ?"
             aria-label="Username"
@@ -37,13 +37,13 @@ const Nav = () => {
           />
         </InputGroup>
       </Form>
-       <Link to="/signupSignin" className="link">
-         <p>Sign Up/Sign In <span><AiOutlineHeart/></span></p>
-       </Link>
-       <Link to="/Cart" className="link">
-       <BsFillBagFill/>
-       </Link>
-      
+      <Link to="/signupSignin" className="link">
+        <p>Sign Up/Sign In <span><AiOutlineHeart /></span></p>
+      </Link>
+      <Link to="/Cart" className="link">
+        <BsFillBagFill />
+      </Link>
+
     </div>
   )
 }

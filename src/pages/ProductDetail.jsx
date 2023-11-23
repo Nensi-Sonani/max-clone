@@ -11,7 +11,7 @@ export const ProductDetail = () => {
     let userId = useSelector((stor) => stor.Reducer.user.id)
     let dispatch = useDispatch();
     //let navigate = useNavigate();
-    const livejsonServer = "https://fakestoreapi.com"
+    const livejsonServer = "http://localhost:8080"
 
     const fetchProductDetail = () => {
         axios.get(`${livejsonServer}/products/${id}`)
@@ -38,6 +38,7 @@ export const ProductDetail = () => {
                 <div className='flex_box '>
                     <div className='col-md-7 mx auto' >
                         <div className='detail_image'>
+                        
                         </div>
                     </div>
                     <div className='col-md-5 mx auto detail_block'>
@@ -51,8 +52,8 @@ export const ProductDetail = () => {
                         <div className='divfeature text-left custome-radio mb-3'><div className='tag' >Select Size:</div>
                             <input className='form-check-input ' name="flexRadioDefault" type="radio"></input><label>S</label>
                             <input className='form-check-input ' name="flexRadioDefault" type="radio"></input><label>m</label>
-                            <input className='form-check-input ' name="flexRadioDefault" type="radio"></input><label>xl</label>
-                            <input className='form-check-input ' name="flexRadioDefault" type="radio"></input><label>xxl   </label>
+                            <input className='form-check-input ' name="flexRadioDefault" type="radio"></input><label>l</label>
+                            <input className='form-check-input ' name="flexRadioDefault" type="radio"></input><label>xl   </label>
                         </div>
                         <div className='mx-2  mb-4 '>
                             <button onClick={handleCart} className='btn_cart p-3 btn btn-primary' >ADD TO BASKET</button>
@@ -75,7 +76,7 @@ export const ProductDetail = () => {
                                     <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
                                     <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
                                 </svg>Pay in installments</h6>
-                                <p className='ms-5'>OPay in easy installments on orders of ₹ 3,000 or more. Available for select banks.</p>
+                                <p className='ms-5'>Pay in easy installments on orders of ₹ 3,000 or more. Available for select banks.</p>
                                 <h6><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="mx-2 bi bi-arrow-left-square" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
                                 </svg>5 days return policy (conditions apply) </h6>
