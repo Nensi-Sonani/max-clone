@@ -1,4 +1,5 @@
 const user =require('../models/Schema')
+const cartmodels = require('../models/cartSchema')
 const productmodel = require('../models/productSchema')
 
 const signuppost =async(req,res)=>{
@@ -53,6 +54,15 @@ const id =async(req,res) => {
     res.send(bts)
 }
 
+const postcart = async (req, res) => {
+   let cartid = await cartmodels.create(req.body)
+   res.send(cartid)
+}
 
-module.exports ={loginpost,signuppost,products,getproducts,id};
+const cart = async (req, res) => {
+  let cartdata= await cartmodels.find()
+  res.send(cartdata)
+}
+
+module.exports ={loginpost,signuppost,products,getproducts,id,cart,postcart};
 
