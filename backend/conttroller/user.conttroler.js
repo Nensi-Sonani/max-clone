@@ -28,8 +28,15 @@ const loginpost =async(req,res)=>{
 }
 
 const getproducts =async (req, res) =>{
-  let data = await productmodel.find()
-  res.send({data:data})
+ 
+  if(req.query){
+    let d = await productmodel.find(data)
+    res.send({data:d})
+  }
+  else{
+    let data = await productmodel.find()
+    res.send({data:data})
+  }
 }
 
 
@@ -37,7 +44,15 @@ const getproducts =async (req, res) =>{
 const products =async(req,res) => {
     let data = await productmodel.create(req.body);
     res.send({msg:"product added successfully"});
+    
 }
 
-module.exports ={loginpost,signuppost,products,getproducts};
+const id =async(req,res) => {
+    let data = req.params;
+    let bts = await productmodel.findOne({_id:data.nens})
+    res.send(bts)
+}
+
+
+module.exports ={loginpost,signuppost,products,getproducts,id};
 
