@@ -16,12 +16,20 @@ const Signup = () => {
     // dispatch(funSignUp());
     try {
       axios.post("http://localhost:8080/signup", obj)
-        .then((res) => setMsg(res.data))
+        .then((res) =>{
+          setMsg(res.data.msg)
+        }).then(()=>{
+          setEmail("")
+          setName("");
+          setPasword("")
+        }
+        )
     }
     catch (error) {
       navi("/error")
     }
   }
+  
   return (
     <div>
       <section className="py-5">
@@ -35,7 +43,8 @@ const Signup = () => {
               />
             </div>
             <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-              {msg}
+            <div className='alert alert-success'>{msg}</div>
+              
               <form onSubmit={handleSignup}>
                 {/* Email input */}
                 <div className="form-outline mb-4">
@@ -76,7 +85,7 @@ const Signup = () => {
                   type="submit"
                   className="btn btn-primary btn-lg btn-block"
                 >
-                  Sign in
+                  Sign up
                 </button>
 
                 <div className="divider d-flex align-items-center my-4">
