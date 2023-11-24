@@ -11,8 +11,9 @@ const Login = () => {
   let navi=useNavigate();
   const handleSignin = (e) => {
     e.preventDefault();
-    dispatch(funSignIn())
-    navi("/")
+    let obj={email:email,password:password}
+    dispatch(funSignIn(obj))
+   // navi("/")
 
   }
 

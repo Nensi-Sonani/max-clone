@@ -86,6 +86,14 @@
 .capit{
     text-transform: capitalize;
 }
+.resetfil{
+    cursor: pointer;
+   float: right;
+   color: #303ab2;
+   font-size: 14px;
+    
+}
+
 .price {
 
     font-weight: bold;
