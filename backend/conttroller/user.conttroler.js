@@ -24,13 +24,17 @@ const loginpost =async(req,res)=>{
     return res.send({msg:"password is incorrect"});
    }
    else{
-     return res.send(req.body)
+     return res.send(User)
    }
 }
 
 const getproducts =async (req, res) =>{
- 
-  if(req.query){
+   let data = req.query
+   console.log(req.query)
+   if(req.query.min && req.query.max){
+    let d = await productmodel.find({price : { $gte : Number(req.query.min),$lte : Number(req.query.max)}})
+    res.send({data : d})
+   }else if(!req.query.min&&!req.query.max&&req.query){
     let d = await productmodel.find(req.query)
     res.send({data:d})
   }
@@ -60,9 +64,8 @@ const postcart = async (req, res) => {
 }
 
 const cart = async (req, res) => {
-  let cartdata= await cartmodels.find()
+  let cartdata= await cartmodels.find().populate("id")
   res.send(cartdata)
 }
 
 module.exports ={loginpost,signuppost,products,getproducts,id,cart,postcart};
-
