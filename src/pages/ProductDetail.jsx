@@ -8,7 +8,7 @@ import { Carousel } from 'react-bootstrap';
 export const ProductDetail = () => {
     const { id } = useParams();
     let [data, setData] = useState("")
-    let userId = useSelector((stor) => stor.Reducer.user.id)
+    let userId = useSelector((stor) => stor.Reducer.user._id)
     let dispatch = useDispatch();
     let navigate = useNavigate();
     const livejsonServer = "http://localhost:8080"
@@ -16,21 +16,19 @@ export const ProductDetail = () => {
     const fetchProductDetail = () => {
         axios.get(`${livejsonServer}/products/${id}`)
             .then((res) => {
-               
                 setData(res.data)
-                console.log(res.data)
             })
             .catch((error) => console.log(error))
     }
     const handleCart = () => {
-        let objcart = { userid: 1, id: data._id }
+        if (userId == null)
+            navigate("/signupSignin")
+        let objcart = { userid: userId, id: data._id }
         dispatch(funAddCart(objcart));
+        navigate("/cart")
     }
     useEffect(() => {
-        //if (userId == null)
-        //  navigate("/signupSignin")
         fetchProductDetail();
-
     }, [])
     return (
         <div>
@@ -43,10 +41,9 @@ export const ProductDetail = () => {
                                 <Carousel data-bs-theme="dark">
 
                                     {
-                                      data &&  data.image.length > 0 &&
+                                        data && data.image.length > 0 &&
                                         data.image.map((element) => {
                                             return (<Carousel.Item>
-                                               
                                                 <img className='d-block w-100' src={element} text="First slide" />
                                             </Carousel.Item>)
                                         })
