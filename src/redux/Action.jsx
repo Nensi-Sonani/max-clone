@@ -1,18 +1,28 @@
 import axios from "axios"
-import { CART, LOGOUT, SIGNIN, SIGNUP } from "./ActionType"
+import { CART, LOGOUT, MSG, SIGNIN, SIGNUP } from "./ActionType"
+import { useNavigate } from "react-router-dom"
 
-export const funSignIn = (data) => (dispatch) => {
-  try {
-    axios.post("http://localhost:8080/login", data)
-      .then((res) => {
-        console.log(res.data)
-        dispatch({ type: SIGNIN, payload: res.data })
-      })
 
+export const funSignIn = (data) => {
+
+  return {
+    type: SIGNIN,
+    payload: data
   }
-  catch (error) {
-    console.log(error)
-  }
+  //try {
+  // axios.post("http://localhost:8080/login", data)
+  //   .then((res) => {
+
+  //     if (res.data.msg)
+  //       dispatch({type:MSG,payload:res.data})
+  //     else
+  //       dispatch({ type: SIGNIN, payload: res.data })
+  //   })
+
+  // }
+  /// catch (error) {
+  // console.log(error)
+  //}
 
 }
 export const funSignUp = (dispatch) => {
@@ -37,7 +47,10 @@ export const funLogout = () => {
 export const funAddCart = (data) => (dispatch) => {
   try {
     axios.post("http://localhost:8080/cart/", data)
-      .then((res) => console.log("cart", res.data))
+      .then((res) => {
+        console.log("cart", res.data)
+
+      })
   }
   catch (error) {
     console.log(error)

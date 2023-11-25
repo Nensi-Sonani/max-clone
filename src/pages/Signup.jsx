@@ -18,6 +18,9 @@ const Signup = () => {
       axios.post("http://localhost:8080/signup", obj)
         .then((res) =>{
           setMsg(res.data.msg)
+          setEmail("")
+          setName("");
+          setPasword("")
         }).then(()=>{
           setEmail("")
           setName("");
@@ -43,7 +46,9 @@ const Signup = () => {
               />
             </div>
             <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-            <div className='alert alert-success'>{msg}</div>
+            <h6 className='formtitle mb-4'>
+            <span className='p-2' style={{ borderBottom: "3px solid #328be9" }} >Sign Up</span></h6>
+           {msg!=""? <div className='alert alert-success'>{msg}</div>:""}
               
               <form onSubmit={handleSignup}>
                 {/* Email input */}
@@ -52,14 +57,14 @@ const Signup = () => {
                     type="text"
                     onChange={(e) => setName(e.target.value)}
                     placeholder='User Name'
-                    className="form-control form-control-lg"
+                    className="form-control form-control"
                   />
                 </div>
                 <div className="form-outline mb-4">
                   <input
                     type="email"
                     onChange={(e) => setEmail(e.target.value)}
-                    className="form-control form-control-lg"
+                    className="form-control form-control"
                     placeholder='Email Address'
                   />
                 </div>
@@ -69,7 +74,7 @@ const Signup = () => {
                   <input
                     type="password"
                     onChange={(e) => setPasword(e.target.value)}
-                    className="form-control form-control-lg"
+                    className="form-control form-control"
                     placeholder='Password'
                   />
                 </div>
