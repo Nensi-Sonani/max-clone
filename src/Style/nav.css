@@ -4,11 +4,15 @@
     box-sizing: border-box;
 }
 
+.toggle{
+    color: blue;
+    margin-top: 12px;
+}
 .Nav{
  display: flex;
  position: fixed;
  position: relative;
- width: 100%;
+ /* width: 100%; */
  justify-content: space-around;
  height: 60px;
  vertical-align: middle;
