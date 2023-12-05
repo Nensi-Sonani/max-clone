@@ -4,6 +4,7 @@ import {Carousel} from 'react-bootstrap';
 import Footer from '../components/Footer';
 
 import '../style/Home.css'
+import '../style/media.css'
 
 const Home = () => {
 
@@ -19,6 +20,7 @@ const Home = () => {
     {/* slider section    */}
     <section className='slider'>
     <div className="container">
+    <div className="slider-img">
     <Carousel data-bs-theme="dark">
       <Carousel.Item>
         <img className='d-block w-100' src='../images/banner1.jpeg' text="First slide" />
@@ -31,13 +33,13 @@ const Home = () => {
       </Carousel.Item>
     </Carousel>
     </div>
+    </div>
     </section>
 
 {/* Trending section  */}
-    <section className='trend'>
+    <section className='trend1'>
       <div className="container">
       <h4>Trending Now </h4>
-      {/* <span>aa</span> */}
      <img src="../images/trending.png" alt="" />
       </div>
     </section>
@@ -48,36 +50,6 @@ const Home = () => {
       <h4>Top Seller</h4>
       <img src="../images/t-seller.gif" alt="" />
     </div>
-    </section>
-
-    {/* get festive ready section  */}
-    <section className='festive'>
-      <div className="container">
-        <h4>Get Festive Ready</h4>
-        <Carousel data-bs-theme="dark">
-      <Carousel.Item>
-        <img className='d-block w-20' src='../images/festive-1.png' text="First slide" />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img className='d-block w-20' src='../images/festive-2.png' text="Second slide" />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img className='d-block w-20' src='../images/festive-3.png' text="Third slide" />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img className='d-block w-20' src='../images/festive-4.png' text="Third slide" />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img className='d-block w-20' src='../images/festive-5.png' text="Third slide" />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img className='d-block w-20' src='../images/festive-6.png' text="Third slide" />
-      </Carousel.Item>
-    </Carousel>
-    <div className="swipe">
-    <img src="../images/swipe.webp" alt="" />
-    </div>
-      </div>
     </section>
 
     {/* top category section  */}
@@ -153,7 +125,9 @@ const Home = () => {
         <img src="../images/character-3.png" alt="" />
         <img src="../images/character-4.png" alt="" />
       </div>
+      <div className="char-img">
       <img src="../images/gift-card.jpeg" alt="" />
+      </div>
       </div>
     </section>
 

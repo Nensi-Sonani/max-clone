@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { BsFillBagFill } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiSearch } from "react-icons/bi";
+import { GiToggles } from "react-icons/gi";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -11,22 +12,28 @@ import Col from 'react-bootstrap/Col';
 import '../style/nav.css'
 const Nav = () => {
   return (
-    <div className="Nav">
+    <div className="Nav container">
+         <div className="toggle">
+            <span><GiToggles /></span>
+        </div>
+      
       <Link to="/" className="link">
          <img src="https://i1.lmsin.net/website_images/in/logos/logo-max.svg"/>
        </Link>
-       <Link to="/Product" className="link">
+       
+       <Link to="/Women" className="link nav-items">
         <span>Women</span>
        </Link>
-       <Link to="/Men" className="link">
+       <Link to="/Men" className="link nav-items">
         <span>Men</span>
        </Link>
-       <Link to="/Girl" className="link">
+       <Link to="/Girl" className="link nav-items">
         <span>Girl</span>
        </Link>
-       <Link to="/Boy" className="link">
+       <Link to="/Boy" className="link nav-items">
         <span>Boy</span>
        </Link>
+     
        <Form inline className='navform'>
         <InputGroup>
           <InputGroup.Text id="basic-addon1"><BiSearch/></InputGroup.Text>
@@ -37,10 +44,10 @@ const Nav = () => {
           />
         </InputGroup>
       </Form>
-       <Link to="/signupSignin" className="link">
+       <Link to="/signupSignin" className="link signin">
          <p>Sign Up/Sign In <span><AiOutlineHeart/></span></p>
        </Link>
-       <Link to="/Cart" className="link">
+       <Link to="/Cart" className="link cart">
        <BsFillBagFill/>
        </Link>
       
