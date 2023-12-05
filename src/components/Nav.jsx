@@ -18,6 +18,7 @@ const Nav = () => {
         </div>
       
       <Link to="/" className="link">
+
          <img src="https://i1.lmsin.net/website_images/in/logos/logo-max.svg"/>
        </Link>
        
@@ -35,8 +36,25 @@ const Nav = () => {
        </Link>
      
        <Form inline className='navform'>
+
+        <img src="https://i1.lmsin.net/website_images/in/logos/logo-max.svg" />
+      </Link>
+      <Link to="/Product/women" className="link">
+        <span>Women</span>
+      </Link>
+      <Link to="/Product/men" className="link">
+        <span>Men</span>
+      </Link>
+      <Link to="/Product/girl" className="link">
+        <span>Girl</span>
+      </Link>
+      <Link to="/Product/boy" className="link">
+        <span>Boy</span>
+      </Link>
+      <Form inline className='navform'>
+
         <InputGroup>
-          <InputGroup.Text id="basic-addon1"><BiSearch/></InputGroup.Text>
+          <InputGroup.Text id="basic-addon1"><BiSearch /></InputGroup.Text>
           <Form.Control
             placeholder="What are you looking for ?"
             aria-label="Username"
@@ -44,6 +62,7 @@ const Nav = () => {
           />
         </InputGroup>
       </Form>
+
        <Link to="/signupSignin" className="link signin">
          <p>Sign Up/Sign In <span><AiOutlineHeart/></span></p>
        </Link>
@@ -51,6 +70,15 @@ const Nav = () => {
        <BsFillBagFill/>
        </Link>
       
+
+      <Link to="/signupSignin" className="link">
+        <p>Sign Up/Sign In <span><AiOutlineHeart /></span></p>
+      </Link>
+      <Link to="/Cart" className="link">
+        <BsFillBagFill />
+      </Link>
+
+
     </div>
   )
 }

@@ -5,41 +5,120 @@ import { Accordion, Spinner } from 'react-bootstrap';
 import '../style/product.css'
 import { useEffect, useState } from 'react';
 import MultiRangeSlider, { ChangeResult } from "multi-range-slider-react";
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 
 
 const Product = () => {
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(0);
+  const [isPriceChange, setIsPriceChange] = useState(false)
+  let [filter, setFilter] = useState({
+    param: []
+  });
+  const arrayColor = [
+    "blue", "pink", "green", "yellow", "grey", "purple", "brown", "orange", "beige", "red", "white", "maroon", "black"
+  ]
+  const arrayCategory = ["men", "women", "girl", "boy"]
+  const arraySize = ["s", "m", "l", "xl"]
   //const [minValue2, setMinValue2] = useState(0);
   // const [maxValue2, setMaxValue2] = useState(0);
   let { data, isLoading, isError } = useSelector((store) => store.ProductReducer)
 
-  let dispatch = useDispatch();
 
+  let category = "";
+  let dispatch = useDispatch();
+  //product by category
+  let catParam = useParams();
+  let filterQuery = "";
+  let tmpFilter = "";
+  if (Object.keys(catParam).length > 0)
+    category = catParam.category;
+
+  if (category !== null && category !== "") {
+    // alert(cat)
+    filterQuery = `?category=${category}`
+  }
+
+
+  if (filter.param.length > 0) {
+
+    tmpFilter = filter.param;
+    if (filterQuery == "")
+      filterQuery = "?" + tmpFilter
+    else
+      filterQuery = filterQuery + tmpFilter
+  }
+ 
 
   const loadProduct = () => {
-    dispatch(funFetchData)
+    //if (isPriceChange) filterQuery = filterQuery + "&min=" + minValue + "&max=" + maxValue
+    dispatch(funFetchData(filterQuery))
+  }
+  const handleResetFilter = () => {
+    let query = ""
+    if (category !== null && category !== "")
+      query = `?category=${category}`
+    dispatch(funFetchData(query))
+  }
+
+  const handleChange = (e) => {
+    const { value, checked, name } = e.target;
+    const { param } = filter;
+    let query = "";
+    if (name == "color")
+      query = "&color=";
+    else if (name == "size")
+      query = "&size="
+    else if (name == "category")
+      query = "&category="
+
+    if (checked) {
+      setFilter({
+        param: [...param, query + value],
+      });
+    }
+    else {
+      setFilter({
+        param: param.filter((e) => e !== query + value),
+      });
+    }
 
   }
-  const handleChange = () => {
-
+  let [sorting, setSorting] = useSearchParams();
+  let sort = sorting.get("sort");
+  const handleSorting = (e) => {
+    const { value } = e.target;
+    setSorting({ sort: value })
   }
-
+  if (sort == "lth") {
+    data.sort((a, b) => a.price - b.price);
+  }
+  else if (sort == "htl") {
+    data.sort((a, b) => b.price - a.price);
+  }
   useEffect(() => {
     loadProduct();
-    //console.log(data)
-  }, [])
+  }, [filter, category,isPriceChange])
   return (
-    <div className='col-md-12 col-lg-12 col-sm-12 col-xs-12 mx-auto d-flex'>
-      <div className='col-md-2 col-lg-2 col-sm-2 col-xs-2 sidebar'>
-        <h4 className='fileter_header'>FILTERS</h4>
+    <div className='col-md-10 col-lg-10 col-sm-10 col-xs-10 mx-auto d-flex'>
+      <div className='col-md-3 col-lg-3 col-sm-3 col-xs-3 sidebar'>
+        <div className='  '><h6 className='fileter_header'>Sort BY</h6> <select style={{ borderRadius: "0" }}
+          className='form-control mb-2 '
+          onChange={handleSorting}
+        >
+          <option value="all" selected> select</option>
+          <option value="lth"> Price - Low To High</option>
+          <option value="htl"> Price - High To Low</option>
+        </select></div>
+        <h4 className='fileter_header'>FILTERS <span className='resetfil' onClick={handleResetFilter} >Clear All</span> </h4>
         <div>
           <MultiRangeSlider
             min={100}
-            max={2000}
+            max={5000}
             maxValue={1500}
             minValue={400}
             onInput={(e: ChangeResult) => {
+              setIsPriceChange(true)
               setMinValue(e.minValue);
               setMaxValue(e.maxValue);
             }}
@@ -63,41 +142,57 @@ const Product = () => {
           <Accordion.Item eventKey="0">
             <Accordion.Header> Catagory</Accordion.Header>
             <Accordion.Body>
-              <div className="form-check">
-                <input type="checkbox" className='form-check-input' value='mens'
-                  name="catagory" />
-                <label className='form-check-label'>Men</label>
-              </div>
-              <div className="form-check">
-                <input type="checkbox" className='form-check-input' value='womens'
-                  name="catagory"
-                />
-                <label className='form-check-label'>Women</label>
-              </div>
-              <div className="form-check">
-                <input type="checkbox" className='form-check-input' value='kids'
-                  name="catagory"
-                />
-                <label className='form-check-label'>Kids</label>
-              </div>
+              {
+                arrayCategory.map((item) => {
+                  return (
+                    <div className="form-check">
+                      <input type="checkbox" className='form-check-input' value={item}
+                        name="category" onChange={handleChange} />
+                      <label className='form-check-label capit' >{item}</label>
+                    </div>
+                  )
+                })
+
+              }
 
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="1">
             <Accordion.Header> Size</Accordion.Header>
             <Accordion.Body>
-            <div className="form-check">
-            <input type="checkbox" className='form-check-input' value='mens'
-              name="catagory" />
-            <label className='form-check-label'>Men</label>
-          </div>
+              {
+                arraySize.map((item) => {
+                  return (
+                    <div className="form-check">
+                      <input type="checkbox" className='form-check-input' value={item}
+                        name="size"
+                        onChange={handleChange}
+                      />
+                      <label className='form-check-label capit'>{item}</label>
+                    </div>
+                  )
+                })
+
+              }
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="2" >
-            <Accordion.Header> Style</Accordion.Header>
+            <Accordion.Header> Color</Accordion.Header>
             <Accordion.Body>
 
+              {
+                arrayColor.map((item) => {
+                  return (
+                    <div className="form-check">
+                      <input style={{ border: `3px solid ${item}` }} type="checkbox" className='form-check-input' value={item}
+                        name="color"
+                        onChange={handleChange} />
+                      <label className='form-check-label capit'>{item}</label>
+                    </div>
+                  )
+                })
 
+              }
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="3">
@@ -109,7 +204,7 @@ const Product = () => {
           </Accordion.Item>
         </Accordion>
       </div>
-      <div className='col-md-10 col-lg-12 col-sm-10 col-xs-10  mx-auto'>
+      <div className='col-md-10 col-lg-10 col-sm-10 col-xs-10  mx-auto'>
         {
           isError ? (<div className="alert alert-danger" role="alert">T
             Some thing went wrong !
@@ -125,38 +220,44 @@ const Product = () => {
 
         {
 
-          data.length > 0 && (<div className='products'>
-            {
-              data.map((item) => {
-                return (
-                  <div className='product__single' key={item.id}>
+          data.length > 0 && (<div className=''>
+            <div className='products'>
+              {
+                data.map((item) => {
+                  return (
 
+                    <div className='product__single' key={item._id}>
 
-                    <div className='image'>  <img src={item.image} alt={item.title}></img></div>
-                    <div className='price'> &#8377; {item.price}</div>
-                    <div className='title'>{item.title}</div>
-                    <div className='d-flex wrap justify-content-around'>
-                      <div className='wrap-img'>
-                        <img src={item.image} alt="p" ></img>
-                        <span>color</span>
+                      <Link className='plink' to={`/productdetail/${item._id}`} >
+                        <div className='image'>  <img src={item.image[0]} alt={item.title}></img></div>
+                        <div className='price'> &#8377; {item.price}</div>
+                        <div className='title'>{item.title}</div>
+                      </Link>
+                      <div className='d-flex wrap justify-content-around'>
+                        <div className='wrap-img'>
+                          <img style={{ background: `${item.color}` }} src={item.image[0]} alt="p" ></img>
+                          <span>color</span>
+                        </div>
+                        <div>
+
+                          <select required style={{ padding: "0.8rem", borderRadius: "0" }} className='form-control mb-2 size-select' value={item.size}
+                          >
+
+                            <option value="s"> Size S</option>
+                            <option value="m">Size M</option>
+                            <option value="l">Size L</option>
+                            <option value="xl">Size XL</option>
+                          </select>
+
+                        </div>
                       </div>
-                      <div>
-
-                        <select required style={{ padding: "0.8rem", borderRadius: "0" }} className='form-control mb-2 size-select' value="soze"
-                        >
-                          <option value="">Select Size</option>
-                          <option value="S">S</option>
-                          <option value="M">M</option>
-                          <option value="L">L</option>
-                        </select>
-                      </div>
+                      <Link className='plink' to={`/productdetail/${item._id}`} > <button className='btn btn-primary btn_cart' >More...</button>
+                      </Link>
                     </div>
-                    <button className='btn btn-primary btn_cart' >ADD TO BAG</button>
-                  </div>
-                );
-              })
-            }
-          </div>
+                  );
+                })
+              }
+            </div></div>
           )
 
         }

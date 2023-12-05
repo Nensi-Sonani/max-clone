@@ -5,20 +5,21 @@ import { useSelector } from 'react-redux'
 
 
 function SignupSignin() {
-  const [toggle,setToggle]=useState(true)
-  const val = useSelector(store =>store)
-  console.log(val)
+  const [toggle, setToggle] = useState(true)
+  const val = useSelector(store => store)
+  // console.log(val)
   return (
-    <div className='lsmain'>
-       <div className='form'>
-        {toggle?<Signup/>:<Login/>}
-       </div>
-      
-       <h3 onClick={()=>setToggle(!toggle)} >
-       {toggle?<span>Already have a accont</span>:<span>Don't have Account </span>}
-       </h3>
-     
-    </div>
+    <div>
+      {toggle ? <Signup /> : <Login />}
+      <div className='text-center'>
+        <h5 onClick={() => setToggle(!toggle)} >
+          {toggle ? <span>Already have a accont</span> : <span>Don't have Account </span>}
+        </h5>
+      </div>
+
+
+    </div >
+
   )
 }
 

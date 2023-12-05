@@ -1,11 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../index.css"
+import { funSignIn } from '../redux/Action';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 const Login = () => {
+  let [email, setEmail] = useState("")
+  let [password, setPassword] = useState("")
+  let [msg, setMsg] = useState("")
+  let dispatch = useDispatch();
+  let navi = useNavigate();
+  const handleSignin = (e) => {
+    e.preventDefault();
+    let obj = { email: email, password: password }
+    try {
+      axios.post("http://localhost:8080/login", obj)
+        .then((res) => {
+          if ('msg' in res.data) {
+            setMsg(res.data.msg)
+          }
+          else {
+            dispatch(funSignIn(res.data))
+            navi("/")
+          }
+        })
+
+    }
+    catch (error) {
+      console.log(error)
+    }
+
+
+    // navi("/")
+
+  }
+
+
   return (
     <div>
-      <section className="vh-100">
-        <div className="container py-5 h-100">
+      <section className="py-5">
+        <div className="container">
           <div className="row d-flex align-items-center justify-content-center h-100">
             <div className="col-md-8 col-lg-7 col-xl-6">
               <img
@@ -15,45 +50,34 @@ const Login = () => {
               />
             </div>
             <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-              <form>
+              <h6 className='formtitle mb-4'>
+                <span className='p-2' style={{ borderBottom: "3px solid #328be9" }} >Sign In</span></h6>
+              {msg != "" ? <div className='alert alert-danger'> {msg}</div> : ""}
+              <form onSubmit={handleSignin}>
                 {/* Email input */}
                 <div className="form-outline mb-4">
                   <input
                     type="email"
-                    id="form1Example13"
-                    className="form-control form-control-lg"
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="form-control form-control"
+                    placeholder='Email Address'
                   />
-                  <label className="form-label" htmlFor="form1Example13">
-                    Email address
-                  </label>
                 </div>
 
                 {/* Password input */}
                 <div className="form-outline mb-4">
                   <input
                     type="password"
-                    id="form1Example23"
-                    className="form-control form-control-lg"
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="form-control form-control"
+                    placeholder='Password'
                   />
-                  <label className="form-label" htmlFor="form1Example23">
-                    Password
-                  </label>
                 </div>
 
                 <div className="d-flex justify-content-around align-items-center mb-4">
                   {/* Checkbox */}
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="form1Example3"
-                      defaultChecked
-                    />
-                    <label className="form-check-label" htmlFor="form1Example3">
-                      Remember me
-                    </label>
-                  </div>
+
+
                   <a href="#!">Forgot password?</a>
                 </div>
 
@@ -69,22 +93,9 @@ const Login = () => {
                   <p className="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
                 </div>
 
-                <a
-                  className="btn btn-primary btn-lg btn-block"
-                  style={{ backgroundColor: '#3b5998' }}
-                  href="#!"
-                  role="button"
-                >
-                  <i className="fab fa-facebook-f me-2"></i>Continue with Facebook
-                </a>
-                <a
-                  className="btn btn-primary btn-lg btn-block"
-                  style={{ backgroundColor: '#55acee' }}
-                  href="#!"
-                  role="button"
-                >
-                  <i className="fab fa-twitter me-2"></i>Continue with Twitter
-                </a>
+
+
+
               </form>
             </div>
           </div>

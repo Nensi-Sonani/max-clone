@@ -16,7 +16,7 @@ export const ProductReducer = (state = initialState, { type, payload }) => {
             ...state, data: payload, isLoading: false
         }
         case ERROR:return{
-            ...state,isError:true
+            ...state,isError:true,isLoading:false
         }
         default:
             return state

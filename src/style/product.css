@@ -83,6 +83,20 @@
     padding: 0.5rem;
     border-bottom: 1px dotted gray;
 }
+.capit{
+    text-transform: capitalize;
+}
+.resetfil{
+    cursor: pointer;
+   float: right;
+   color: #303ab2;
+   font-size: 14px;
+    
+}
+.error{
+    color:red;
+    font-size: 12px;
+}
 
 .price {
 
@@ -91,7 +105,10 @@
     font-size: 18px;
 
 }
-
+.plink{
+    color:rgb(51, 50, 50);
+    text-decoration: none;
+}
 .price:hover {
 
     font-weight: bold;
