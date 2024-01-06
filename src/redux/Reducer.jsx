@@ -11,12 +11,12 @@ const Reducer = (state = initialState, action) => {
     switch (action.type) {
         case MSG:
             return {
-                ...state,  isLogin: false, isSignUp: false,msg: action.payload
+                ...state, msg: action.payload
             }
         case SIGNIN:
             // console.log(action.payload)
             return {
-                ...state, user: action.payload, isLogin: true, isSignUp: false,msg:""
+                ...state, user: action.payload, isLogin: true, isSignUp: false, msg: ""
             }
         case SIGNUP:
             return {

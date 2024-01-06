@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../index.css"
 import { funSignIn } from '../redux/Action';
@@ -8,38 +8,27 @@ import axios from 'axios';
 const Login = () => {
   let [email, setEmail] = useState("")
   let [password, setPassword] = useState("")
-  let [msg, setMsg] = useState("")
+  let [warningMsg, setMsg] = useState("")
   let dispatch = useDispatch();
   let navi = useNavigate();
+  let storeData = useSelector((store) => store.Reducer)
+
   const handleSignin = (e) => {
     e.preventDefault();
     let obj = { email: email, password: password }
-    try {
-      axios.post("http://localhost:8080/login", obj)
-        .then((res) => {
-          if ('msg' in res.data) {
-            setMsg(res.data.msg)
-          }
-          else {
-            dispatch(funSignIn(res.data))
-            navi("/")
-          }
-        })
-
-    }
-    catch (error) {
-      console.log(error)
-    }
-
-
-    // navi("/")
-
+    dispatch(funSignIn(obj))
   }
-
+  useEffect(() => {
+    if (storeData.isLogin)
+      navi("/")
+    console.log(storeData)
+    if (storeData.msg)
+      setMsg(storeData.msg)
+  }, [handleSignin])
 
   return (
     <div>
-      <section className="py-5">
+      <section className="py-1">
         <div className="container">
           <div className="row d-flex align-items-center justify-content-center h-100">
             <div className="col-md-8 col-lg-7 col-xl-6">
@@ -52,7 +41,7 @@ const Login = () => {
             <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
               <h6 className='formtitle mb-4'>
                 <span className='p-2' style={{ borderBottom: "3px solid #328be9" }} >Sign In</span></h6>
-              {msg != "" ? <div className='alert alert-danger'> {msg}</div> : ""}
+              {warningMsg != "" ? <div className='alert alert-danger'> {warningMsg}</div> : ""}
               <form onSubmit={handleSignin}>
                 {/* Email input */}
                 <div className="form-outline mb-4">
@@ -74,12 +63,12 @@ const Login = () => {
                   />
                 </div>
 
-                <div className="d-flex justify-content-around align-items-center mb-4">
-                  {/* Checkbox */}
+                 {/*<div className="d-flex justify-content-around align-items-center mb-4">
+                  Checkbox 
 
 
                   <a href="#!">Forgot password?</a>
-                </div>
+                </div>*/}
 
                 {/* Submit button */}
                 <button

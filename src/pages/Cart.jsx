@@ -19,7 +19,7 @@ const Cart = (props) => {
     let total = 0;
     const loadCart = () => {
         try {
-            axios.post("http://localhost:8080/cart")
+            axios.get("http://localhost:8080/cart")
                 .then((res) => {
                     // let d = res.data.filter((val, i) => val.userid == user._id);
                     console.log(res.data)
