@@ -3,38 +3,37 @@ import { CART, LOGOUT, MSG, SIGNIN, SIGNUP } from "./ActionType"
 import { useNavigate } from "react-router-dom"
 
 
-export const funSignIn = (data) => {
-
-  return {
-    type: SIGNIN,
-    payload: data
-  }
-  //try {
-  // axios.post("http://localhost:8080/login", data)
-  //   .then((res) => {
-
-  //     if (res.data.msg)
-  //       dispatch({type:MSG,payload:res.data})
-  //     else
-  //       dispatch({ type: SIGNIN, payload: res.data })
-  //   })
-
-  // }
-  /// catch (error) {
-  // console.log(error)
-  //}
-
-}
-export const funSignUp = (dispatch) => {
+export const funSignIn = (data) => (_dispatch) => {
   try {
-    axios.post("http://localhost:8080/signup")
+    axios.post("http://localhost:8080/login", data)
       .then((res) => {
-        dispatch({ type: SIGNUP })
+        // console.log(res.data)
+        if (res.data.msg)
+          _dispatch({ type: MSG, payload: res.data.msg })
+        else
+          _dispatch({ type: SIGNIN, payload: res.data })
       })
 
   }
   catch (error) {
-    console.log(error)
+    _dispatch({ type: MSG, payload: "some thing went wrong" })
+  }
+
+}
+export const funSignUp = (data) => (_dispatch) => {
+  try {
+    axios.post("http://localhost:8080/signup", data)
+      .then((res) => {
+        console.log(res.data)
+        if (res.data.msg)
+          _dispatch({ type: MSG, payload: res.data.msg })
+        else
+          _dispatch({ type: SIGNUP})
+      })
+
+  }
+  catch (error) {
+    _dispatch({ type: MSG, payload: "some thing went wrong" })
   }
 
 

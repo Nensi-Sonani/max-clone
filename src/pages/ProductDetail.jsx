@@ -8,7 +8,7 @@ import { Carousel } from 'react-bootstrap';
 export const ProductDetail = () => {
     const { id } = useParams();
     let [data, setData] = useState("")
-    let userId = useSelector((stor) => stor.Reducer.user._id)
+    let storeData = useSelector((stor) => stor.Reducer)
     let dispatch = useDispatch();
     let navigate = useNavigate();
     const livejsonServer = "http://localhost:8080"
@@ -21,11 +21,13 @@ export const ProductDetail = () => {
             .catch((error) => console.log(error))
     }
     const handleCart = () => {
-        if (userId == null)
+        if (!storeData.isLogin)
             navigate("/signupSignin")
-        let objcart = { userid: userId, id: data._id }
-        dispatch(funAddCart(objcart));
-        navigate("/cart")
+        else {
+            let objcart = { userid: storeData.user._id, id: data._id }
+            dispatch(funAddCart(objcart));
+            navigate("/cart")
+        }
     }
     useEffect(() => {
         fetchProductDetail();

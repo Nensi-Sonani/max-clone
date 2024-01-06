@@ -1,6 +1,6 @@
 import axios from 'axios';
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { funSignUp } from '../redux/Action';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,32 +10,46 @@ const Signup = () => {
   let [password, setPasword] = useState("")
   let [msg, setMsg] = useState("")
   let navi = useNavigate();
+  let dispatch = useDispatch();
+  let storeData = useSelector((store) => store.Reducer)
   const handleSignup = (e) => {
+    try{
     e.preventDefault();
     let obj = { username: name, email: email, password: password }
-    // dispatch(funSignUp());
-    try {
-      axios.post("http://localhost:8080/signup", obj)
-        .then((res) =>{
-          setMsg(res.data.msg)
-          setEmail("")
-          setName("");
-          setPasword("")
-        }).then(()=>{
-          setEmail("")
-          setName("");
-          setPasword("")
-        }
-        )
+    dispatch(funSignUp(obj));
     }
-    catch (error) {
+    catch(error)
+    {
       navi("/error")
     }
   }
-  
+  useEffect(() => {
+    if (storeData.isLogin)
+      navi("/")
+    if (storeData.msg) setMsg(storeData.msg)
+  },[handleSignup])
+  //   try {
+  //     axios.post("http://localhost:8080/signup", obj)
+  //       .then((res) =>{
+  //         setMsg(res.data.msg)
+  //         setEmail("")
+  //         setName("");
+  //         setPasword("")
+  //       }).then(()=>{
+  //         setEmail("")
+  //         setName("");
+  //         setPasword("")
+  //       }
+  //       )
+  //   }
+  //   catch (error) {
+  //     navi("/error")
+  //   }
+  // }
+
   return (
     <div>
-      <section className="py-5">
+      <section className="py-1">
         <div className="container  ">
           <div className="row d-flex align-items-center justify-content-center h-100">
             <div className="col-md-8 col-lg-7 col-xl-6">
@@ -46,10 +60,10 @@ const Signup = () => {
               />
             </div>
             <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-            <h6 className='formtitle mb-4'>
-            <span className='p-2' style={{ borderBottom: "3px solid #328be9" }} >Sign Up</span></h6>
-           {msg!=""? <div className='alert alert-success'>{msg}</div>:""}
-              
+              <h6 className='formtitle mb-4'>
+                <span className='p-2' style={{ borderBottom: "3px solid #328be9" }} >Sign Up</span></h6>
+              {msg != "" ? <div className='alert alert-success'>{msg}</div> : ""}
+
               <form onSubmit={handleSignup}>
                 {/* Email input */}
                 <div className="form-outline mb-4">
@@ -79,11 +93,8 @@ const Signup = () => {
                   />
                 </div>
 
-                <div className="d-flex justify-content-around align-items-center mb-4">
-                  {/* Checkbox */}
-
-                  <a href="#!">Forgot password?</a>
-                </div>
+                {/*<div className="d-flex justify-content-around align-items-center mb-4">
+                   Checkbox */}
 
                 {/* Submit button */}
                 <button

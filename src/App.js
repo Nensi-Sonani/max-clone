@@ -9,6 +9,7 @@ import Product from './pages/Product';
 import Cart from './pages/Cart';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { ProductDetail } from './pages/ProductDetail';
+import Footer from './components/Footer';
 
 function App() {
   useEffect(()=>{
@@ -30,7 +31,7 @@ function App() {
 
       <Nav/>
      <Allroute/>
-
+<Footer/>
     </div>
 
   );

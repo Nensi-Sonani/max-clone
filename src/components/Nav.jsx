@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { BsFillBagFill } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -10,7 +10,16 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import '../style/nav.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { funLogout } from '../redux/Action';
+
 const Nav = () => {
+  let storeData = useSelector((store) => store.Reducer)
+  console.log(storeData)
+  let dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(funLogout())
+  }
   return (
     <div className="Nav container">
       <div className="toggle">
@@ -34,7 +43,7 @@ const Nav = () => {
       <Link to="/Product/boy" className="link">
         <span>Boy</span>
       </Link>
-      <Form inline className='navform'>
+      {/*<Form inline className='navform'>
 
         <InputGroup>
           <InputGroup.Text id="basic-addon1"><BiSearch /></InputGroup.Text>
@@ -44,11 +53,14 @@ const Nav = () => {
             aria-describedby="basic-addon1"
           />
         </InputGroup>
-      </Form>
+  </Form> <spanG?OUT
+       ><AiOutlineHeart /></spanG?OUT>*/}
+       {storeData.isLogin ? <button className='btn btn-outline text-danger border ' onClick={handleLogout} >LOGOUT</button>
+       :""}
+      {!storeData.isLogin ? (<Link to="/signupSignin" className="link signin"><p>Sign Up/Sign In </p></Link>)
+        : (<Link className="link cart"><p>Hi {storeData.user.username}</p>
+        </Link>)}
 
-      <Link to="/signupSignin" className="link signin">
-        <p>Sign Up/Sign In <span><AiOutlineHeart /></span></p>
-      </Link>
       <Link to="/Cart" className="link cart">
         <BsFillBagFill />
       </Link>

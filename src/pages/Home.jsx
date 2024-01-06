@@ -147,7 +147,7 @@ const Home = () => {
       </div>
     </section>
 
-    {/* winter section  */}
+    {/* winter section  
     <section className='winter'>
       <div className="container">
       <h4>Winter Must Haves</h4>
@@ -158,7 +158,7 @@ const Home = () => {
         <img src="../images/winter-4.jpeg" alt="" />
       </div>
       </div>
-    </section>
+    </section>*/}
 
     {/* top store section  */}
     <section className='top'>
@@ -191,7 +191,7 @@ const Home = () => {
         <img src="../images/benefit-3.png" alt="" />
       </div>
       </div>
-      <div className="container benefit-1">
+      {/*<div className="container benefit-1">
      <div className="row d-flex p-4">
       <div className="section-1 col-4">
         <p>This section is personalised for you. View your live order details or pending cart details here.</p>
@@ -200,8 +200,8 @@ const Home = () => {
         <div className="section-2 col-4">
           <img src="../images/benefit.svg" alt="" />
         </div>
-      </div>
-     </div>
+  </div>
+  </div>*/}
     </section>
 
     {/* subscribe section  */}
@@ -209,7 +209,7 @@ const Home = () => {
     <div className="container">
     </div>
     </section>
-    <Footer/>
+    
     </>
   )
 }
