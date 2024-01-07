@@ -1,3 +1,5 @@
+
+
 import React, { useState } from 'react'
 import Cart from './Cart'
 import { Formik, Form } from 'formik'
@@ -35,23 +37,13 @@ const Order = () => {
             <div className='flex_box1' style={{ background: "white" }} >
                 <div className=' order-1 '>
 
-
-                    <Formik
-                        initialValues={{
-                            firstName: '',
-                            lastName: '',
-                            mobileNo: "",
-                            email: '',
-                            address: '',
-                            pincode: ""
-
                         }}
                         validationSchema={validate}
                         onSubmit={values => {
                             
 
                         }}
-                    >
+                    
                         {formik => (
                             <div className='mb-5'>
                                 <Form>
@@ -75,9 +67,6 @@ const Order = () => {
                                 </Form>
                             </div>
 
-                        )}
-                    </Formik>
-
                 </div>
                 <div className='order-1 '>
                     <Cart type="shipping" />
@@ -86,4 +75,5 @@ const Order = () => {
     )
 }
 
-export default Order
+
+// export default Order
