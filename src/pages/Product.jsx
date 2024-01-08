@@ -206,8 +206,8 @@ const Product = () => {
       </div>
       <div className='col-md-10 col-lg-10 col-sm-10 col-xs-10  mx-auto'>
         {
-          isError ? (<div className="alert alert-danger" role="alert">T
-            Some thing went wrong !
+          isError ? (<div className="alert alert-danger" role="alert">
+            Please wait for rendering products it will take some time. . . .
           </div>
           )
             : null
