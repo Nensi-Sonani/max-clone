@@ -24,8 +24,10 @@ export const funSignUp = (data) => (_dispatch) => {
   try {
     axios.post("https://max-backend-eujg.onrender.com/signup", data)
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data) 
+        window.location.href = "/"
         if (res.data.msg)
+
           _dispatch({ type: MSG, payload: res.data.msg })
         else
           _dispatch({ type: SIGNUP})

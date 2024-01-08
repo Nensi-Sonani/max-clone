@@ -17,10 +17,11 @@ const Signup = () => {
     e.preventDefault();
     let obj = { username: name, email: email, password: password }
     dispatch(funSignUp(obj));
+    
     }
     catch(error)
     {
-      navi("/error")
+      alert("enter all fields")
     }
   }
   useEffect(() => {
@@ -103,9 +104,12 @@ const Signup = () => {
                 >
                   Sign up
                 </button>
+
                 <div className="divider d-flex align-items-center my-4">
                   <p className="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
                 </div>
+
+
               </form>
             </div>
           </div>

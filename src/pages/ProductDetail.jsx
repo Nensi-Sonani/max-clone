@@ -46,7 +46,7 @@ export const ProductDetail = () => {
                                         data && data.image.length > 0 &&
                                         data.image.map((element) => {
                                             return (<Carousel.Item>
-                                                <img className='d-block w-100' src={element} text="First slide" alt='img' />
+                                                <img className='d-block w-100' src={element.image} text="First slide" alt='img' />
                                             </Carousel.Item>)
                                         })
                                     }
