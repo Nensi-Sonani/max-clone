@@ -14,24 +14,9 @@ const Cart = (props) => {
     const [data, setData] = useState([]);
     let total = 0;
 
-
     const loadCart = async () => {
-
-    const loadCart = () => {
         try {
-            axios.get("http://localhost:8080/cart")
-                .then((res) => {
-                    // let d = res.data.filter((val, i) => val.userid == user._id);
-                    console.log(res.data)
-                })
-        }
-        catch (error) {
-            // navi("/error")
-        }
-    }
-    const removeCart = () => {
-        try {
-            const response = await axios.post("http://localhost:8080/cart");
+            const response = await axios.get("https://max-backend-eujg.onrender.com/cart");
             setData(response.data); // Assuming response.data is an array received from the server
         } catch (error) {
             console.error("Error fetching cart data:", error);
@@ -39,9 +24,15 @@ const Cart = (props) => {
         }
     };
 
-    const removeCartItem = (itemId) => {
-        // Implement logic to remove the item from the cart using its ID (itemId)
-        // Example: axios.delete(`http://localhost:8080/cart/${itemId}`).then(...)
+    const removeCartItem = async (itemId) => {
+        try {
+            await axios.delete(`https://max-backend-eujg.onrender.com/${itemId}`);
+            // Reload the cart after item removal
+            loadCart();
+        } catch (error) {
+            console.error("Error removing cart item:", error);
+            // Handle error or navigate to error page
+        }
     };
 
     useEffect(() => {
@@ -50,8 +41,9 @@ const Cart = (props) => {
 
     return (
         <div className='col-md-10 col-lg-10 col-sm-10 col-xl-10 mx-auto '>
-            <h6 className='formtitle mb-4'><span className='p-2' style={{ borderBottom: "3px solid #328be9" }} >
-            {isPropes === "" ? "Your shopping basket" : "Order Summary"}</span></h6>
+            <h6 className='formtitle mb-4'><span className='p-2' style={{ borderBottom: "3px solid #328be9" }}>
+                {isPropes === "" ? "Your shopping basket" : "Order Summary"}
+            </span></h6>
 
             <div className="flex_box" style={{ background: "white" }}>
                 <div className='col-md-7 col-sm-7 col-lg-7 col-xl-7 order-1'>
