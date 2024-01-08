@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 
 export const funSignIn = (data) => (_dispatch) => {
   try {
-    axios.post("http://localhost:8080/login", data)
+    axios.post("https://max-backend-eujg.onrender.com/login", data)
       .then((res) => {
         // console.log(res.data)
         if (res.data.msg)
@@ -22,7 +22,7 @@ export const funSignIn = (data) => (_dispatch) => {
 }
 export const funSignUp = (data) => (_dispatch) => {
   try {
-    axios.post("http://localhost:8080/signup", data)
+    axios.post("https://max-backend-eujg.onrender.com/signup", data)
       .then((res) => {
         console.log(res.data)
         if (res.data.msg)
@@ -45,7 +45,7 @@ export const funLogout = () => {
 }
 export const funAddCart = (data) => (dispatch) => {
   try {
-    axios.post("http://localhost:8080/cart/", data)
+    axios.post("https://max-backend-eujg.onrender.com/", data)
       .then((res) => {
         console.log("cart", res.data)
 
