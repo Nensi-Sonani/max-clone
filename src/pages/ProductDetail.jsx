@@ -11,7 +11,7 @@ export const ProductDetail = () => {
     let storeData = useSelector((stor) => stor.Reducer)
     let dispatch = useDispatch();
     let navigate = useNavigate();
-    const livejsonServer = "http://localhost:8080"
+    const livejsonServer = "https://max-backend-eujg.onrender.com/"
 
     const fetchProductDetail = () => {
         axios.get(`${livejsonServer}/products/${id}`)
@@ -46,7 +46,7 @@ export const ProductDetail = () => {
                                         data && data.image.length > 0 &&
                                         data.image.map((element) => {
                                             return (<Carousel.Item>
-                                                <img className='d-block w-100' src={element} text="First slide" />
+                                                <img className='d-block w-100' src={element} text="First slide" alt='img' />
                                             </Carousel.Item>)
                                         })
                                     }
