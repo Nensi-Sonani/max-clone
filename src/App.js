@@ -13,7 +13,7 @@ import Footer from './components/Footer';
 
 function App() {
   useEffect(()=>{
-    fetch(`http://localhost:8080/`)
+    fetch(`https://max-backend-eujg.onrender.com/`)
     .then((res)=>{
       return res.json()
     })
