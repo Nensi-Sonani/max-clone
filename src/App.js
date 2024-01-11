@@ -12,18 +12,7 @@ import { ProductDetail } from './pages/ProductDetail';
 import Footer from './components/Footer';
 
 function App() {
-  useEffect(()=>{
-    fetch(`https://max-backend-eujg.onrender.com/`)
-    .then((res)=>{
-      return res.json()
-    })
-    .then((res)=>{
-      console.log(res)
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-  },[])
+ 
   return (
 
     <div className="App">

@@ -15,11 +15,19 @@ import { funLogout } from '../redux/Action';
 
 const Nav = () => {
   let storeData = useSelector((store) => store.Reducer)
+  let Login = localStorage.getItem("login")
+  let userName = localStorage.getItem('userName');
+  
   console.log(storeData)
   let dispatch = useDispatch();
   const handleLogout = () => {
+    localStorage.removeItem("login")
+    localStorage.removeItem("userName")
+    window.location.reload();
     dispatch(funLogout())
+   
   }
+  
   return (
     <div className="Nav container">
       <div className="toggle">
@@ -28,7 +36,7 @@ const Nav = () => {
 
       <Link to="/" className="link">
 
-        <img src="https://i1.lmsin.net/website_images/in/logos/logo-max.svg" />
+        <img src="https://i1.lmsin.net/website_images/in/logos/logo-max.svg" alt='img'/>
       </Link>
 
       <Link to="/Product/women" className="link">
@@ -37,7 +45,7 @@ const Nav = () => {
       <Link to="/Product/men" className="link">
         <span>Men</span>
       </Link>
-      <Link to="/Product/girl" className="link">
+      <Link to="/Product/Girl" className="link">
         <span>Girl</span>
       </Link>
       <Link to="/Product/boy" className="link">
@@ -55,10 +63,9 @@ const Nav = () => {
         </InputGroup>
   </Form> <spanG?OUT
        ><AiOutlineHeart /></spanG?OUT>*/}
-       {storeData.isLogin ? <button className='btn btn-outline text-danger border ' onClick={handleLogout} >LOGOUT</button>
-       :""}
-      {!storeData.isLogin ? (<Link to="/signupSignin" className="link signin"><p>Sign Up/Sign In </p></Link>)
-        : (<Link className="link cart"><p>Hi {storeData.user.username}</p>
+       {( Login) ? <div> <button className='btn btn-outline text-danger border ' onClick={handleLogout} >LOGOUT</button></div> : ""}
+      {Login ==null ? (<Link to="/signupSignin" className="link signin"><p>Sign Up/Sign In </p></Link>)
+        : (<Link className="link cart"><p>Hi {userName}</p>
         </Link>)}
 
       <Link to="/Cart" className="link cart">

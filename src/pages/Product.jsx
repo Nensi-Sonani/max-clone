@@ -18,7 +18,7 @@ const Product = () => {
   const arrayColor = [
     "blue", "pink", "green", "yellow", "grey", "purple", "brown", "orange", "beige", "red", "white", "maroon", "black"
   ]
-  const arrayCategory = ["men", "women", "girl", "boy"]
+  const arrayCategory = ["men", "women", "Girl", "boy"]
   const arraySize = ["s", "m", "l", "xl"]
   //const [minValue2, setMinValue2] = useState(0);
   // const [maxValue2, setMaxValue2] = useState(0);
@@ -58,6 +58,7 @@ const Product = () => {
     let query = ""
     if (category !== null && category !== "")
       query = `?category=${category}`
+    console.log(query, category);
     dispatch(funFetchData(query))
   }
 
@@ -177,7 +178,7 @@ const Product = () => {
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="2" >
-            <Accordion.Header> Color</Accordion.Header>
+            <Accordion.Header> Color</Accordion.Header>DS
             <Accordion.Body>
 
               {

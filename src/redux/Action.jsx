@@ -7,9 +7,12 @@ export const funSignIn = (data) => (_dispatch) => {
   try {
     axios.post("https://max-backend-eujg.onrender.com/login", data)
       .then((res) => {
-        // console.log(res.data)
-        if (res.data.msg)
+        console.log(res.data.msg)
+       
+        if (res.data){
+          localStorage.setItem("login", true)
           _dispatch({ type: MSG, payload: res.data.msg })
+        }
         else
           _dispatch({ type: SIGNIN, payload: res.data })
       })
@@ -25,7 +28,7 @@ export const funSignUp = (data) => (_dispatch) => {
     axios.post("https://max-backend-eujg.onrender.com/signup", data)
       .then((res) => {
         console.log(res.data) 
-        window.location.href = "/"
+        // window.location.href = "/"
         if (res.data.msg)
 
           _dispatch({ type: MSG, payload: res.data.msg })
@@ -46,8 +49,9 @@ export const funLogout = () => {
   }
 }
 export const funAddCart = (data) => (dispatch) => {
+  
   try {
-    axios.post("https://max-backend-eujg.onrender.com/", data)
+    axios.post("https://max-backend-eujg.onrender.com/cart", data)
       .then((res) => {
         console.log("cart", res.data)
 
