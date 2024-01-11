@@ -2,12 +2,12 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Cart from '../pages/Cart'
 import Home from '../pages/Home'
-import Signup from '../pages/SignupSignin'
+// import Signup from '../pages/SignupSignin'
 import Product from '../pages/Product'
 import SignupSignin from '../pages/SignupSignin'
 import { ProductDetail } from '../pages/ProductDetail'
 import Error from '../pages/Error'
-import Order from '../pages/Order'
+// import Order from '../pages/Order'
 import Orderplaced from '../pages/Orderplaced'
 // import Notfound from '../pages/Notfound'
 
@@ -23,7 +23,7 @@ const Allroute = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path='/signupSignin' element={<SignupSignin />} />
         <Route path="/error" element={<Error/>}/>
-        <Route path="/order" element={<Order/>} />
+        {/* <Route path="/order" element={<Order/>} /> */}
         <Route path="/orderplaced" element={<Orderplaced/>} />
         {/* <Route path='*' element={<Notfound/>}/>      */}
       </Routes>

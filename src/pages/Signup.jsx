@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { funSignUp } from '../redux/Action';
@@ -12,23 +12,42 @@ const Signup = () => {
   let navi = useNavigate();
   let dispatch = useDispatch();
   let storeData = useSelector((store) => store.Reducer)
-  const handleSignup = (e) => {
-    try{
+
+
+  const handleSignup =  (e) => {
     e.preventDefault();
-    let obj = { username: name, email: email, password: password }
-    dispatch(funSignUp(obj));
+    try {
+      let obj = { username: name, email: email, password: password };
+      
+      dispatch(funSignUp(obj));
+      if(name.length >0 && email.length >0 && password.length>0){
+        localStorage.setItem('userName', name);
+        localStorage.setItem('login', true);
+        localStorage.setItem('userid', );
+        navi('/');
+      }
+      else{
+        localStorage.removeItem("")
+        alert("enter all fiels")
+      }
+
+    }
+     catch (error) {
+      console.log(error);
     
+      alert('Signup failed. Please try again.');
     }
-    catch(error)
-    {
-      alert("enter all fields")
-    }
-  }
+    
+  };
+
   useEffect(() => {
-    if (storeData.isLogin)
-      navi("/")
-    if (storeData.msg) setMsg(storeData.msg)
-  },[handleSignup])
+    // if (storeData.isLogin) {
+    //   navi('/');
+    // } else if (storeData.msg) {
+    //   setMsg(storeData.msg);
+    // }
+  }, [storeData.isLogin, storeData.msg, navi]);
+
   //   try {
   //     axios.post("http://localhost:8080/signup", obj)
   //       .then((res) =>{
@@ -57,13 +76,12 @@ const Signup = () => {
               <img
                 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
                 className="img-fluid"
-                alt="Phone image"
-              />
+                alt="Phoneimage"/>
             </div>
             <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
               <h6 className='formtitle mb-4'>
                 <span className='p-2' style={{ borderBottom: "3px solid #328be9" }} >Sign Up</span></h6>
-              {msg != "" ? <div className='alert alert-success'>{msg}</div> : ""}
+              {msg !== "" ? <div className='alert alert-success'>{msg}</div> : ""}
 
               <form onSubmit={handleSignup}>
                 {/* Email input */}

@@ -11,23 +11,26 @@ export const ProductDetail = () => {
     let storeData = useSelector((stor) => stor.Reducer)
     let dispatch = useDispatch();
     let navigate = useNavigate();
-    const livejsonServer = "https://max-backend-eujg.onrender.com/"
+    const livejsonServer = "https://max-backend-eujg.onrender.com"
 
     const fetchProductDetail = () => {
         axios.get(`${livejsonServer}/products/${id}`)
             .then((res) => {
                 setData(res.data)
+                console.log(res.data);
             })
             .catch((error) => console.log(error))
     }
-    const handleCart = () => {
-        if (!storeData.isLogin)
-            navigate("/signupSignin")
-        else {
-            let objcart = { userid: storeData.user._id, id: data._id }
+    const handleCart = (e) => {
+        e.preventDefault()  
+        // if (!storeData.isLogin)
+        //     navigate("/signupSignin")
+        // else {
+            console.log("------>",storeData.user);
+            let objcart = { id }
             dispatch(funAddCart(objcart));
             navigate("/cart")
-        }
+        // }
     }
     useEffect(() => {
         fetchProductDetail();
@@ -40,19 +43,32 @@ export const ProductDetail = () => {
                         <div className='col-md-7 mx auto' >
                             <div className='detail_image'>
 
-                                <Carousel data-bs-theme="dark">
-
-                                    {
-                                        data && data.image.length > 0 &&
+                                {/* <Carousel data-bs-theme="dark">
+                                    {data && data.image.length > 0 &&
                                         data.image.map((element) => {
-                                            return (<Carousel.Item>
-                                                <img className='d-block w-100' src={element.image} text="First slide" alt='img' />
-                                            </Carousel.Item>)
+                                            return (
+                                                <Carousel.Item>
+                                                    <img className='d-block w-100' src={element.image} text="First slide" alt='img' />
+                                                </Carousel.Item>
+                                            );
                                         })
                                     }
-
-
+                                </Carousel> */}
+                                <Carousel data-bs-theme="dark">
+                                    {data?.image && data?.image?.length > 0 &&
+                                        data?.image?.map((imageObj, index) => (
+                                            
+                                            <Carousel.Item key={index}>
+                                                <img
+                                                    className='d-block w-100'
+                                                    src={imageObj}
+                                                    alt={`Slide ${index}`}
+                                                />
+                                            </Carousel.Item>
+                                        ))
+                                    }
                                 </Carousel>
+
                             </div>
                         </div>
                         <div className='col-md-5 mx auto detail_block'>

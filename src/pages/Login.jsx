@@ -19,9 +19,8 @@ const Login = () => {
     dispatch(funSignIn(obj))
   }
   useEffect(() => {
-    if (storeData.isLogin)
+    if (localStorage.getItem("login"))
       navi("/")
-    console.log(storeData)
     if (storeData.msg)
       setMsg(storeData.msg)
   }, [handleSignin])
@@ -35,7 +34,7 @@ const Login = () => {
               <img
                 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
                 className="img-fluid"
-                alt="Phone image"
+                alt="Phoneimage"
               />
             </div>
             <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
